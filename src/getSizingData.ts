@@ -1,3 +1,4 @@
+import isBrowser from '#is-browser';
 import { pick } from './utils';
 
 const SIZING_STYLE = [
@@ -24,10 +25,12 @@ const SIZING_STYLE = [
   'textTransform',
   'width',
   'wordBreak',
+  'wordSpacing',
+  'scrollbarGutter',
 ] as const;
 
 type SizingProps = Extract<
-  typeof SIZING_STYLE[number],
+  (typeof SIZING_STYLE)[number],
   keyof CSSStyleDeclaration
 >;
 
@@ -39,10 +42,9 @@ export type SizingData = {
   borderSize: number;
 };
 
-const isIE =
-  typeof document !== 'undefined'
-    ? !!(document.documentElement as any).currentStyle
-    : false;
+const isIE = isBrowser
+  ? !!(document.documentElement as any).currentStyle
+  : false;
 
 const getSizingData = (node: HTMLElement): SizingData | null => {
   const style = window.getComputedStyle(node);
@@ -51,7 +53,7 @@ const getSizingData = (node: HTMLElement): SizingData | null => {
     return null;
   }
 
-  const sizingStyle = pick((SIZING_STYLE as unknown) as SizingProps[], style);
+  const sizingStyle = pick(SIZING_STYLE as unknown as SizingProps[], style);
   const { boxSizing } = sizingStyle;
 
   // probably node is detached from DOM, can't read computed dimensions

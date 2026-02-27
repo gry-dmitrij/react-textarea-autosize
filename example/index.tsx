@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import TextareaAutosize from '../src';
 
 const range = (n: number): number[] => Array.from({ length: n }, (_, i) => i);
@@ -117,7 +117,7 @@ const ControlledMode = () => {
       <TextareaAutosize
         cacheMeasurements
         value={value}
-        onChange={ev => setValue(ev.target.value)}
+        onChange={(ev) => setValue(ev.target.value)}
       />
       <button onClick={() => setValue('This value was set programatically')}>
         {'Change value programatically'}
@@ -156,7 +156,7 @@ const OnHeightChangeCallback = () => {
       </pre>
       <TextareaAutosize
         cacheMeasurements
-        onHeightChange={height => {
+        onHeightChange={(height) => {
           // eslint-disable-next-line no-console
           console.log(height);
         }}
@@ -173,12 +173,61 @@ const MultipleTextareas = () => {
       <div>{'This one controls the rest.'}</div>
       <TextareaAutosize
         value={value}
-        onChange={ev => setValue(ev.target.value)}
+        onChange={(ev) => setValue(ev.target.value)}
       />
       <div>{'Those get controlled by the one above.'}</div>
-      {range(15).map(i => (
+      {range(15).map((i) => (
         <TextareaAutosize key={i} value={value} />
       ))}
+    </div>
+  );
+};
+
+const WithCustomFont = () => {
+  return (
+    <div>
+      <h2>{'Adapts to custom fonts.'}</h2>
+      <div>{'Resizes once the font is loaded.'}</div>
+      <TextareaAutosize
+        style={{
+          fontSize: 20,
+          fontFamily: "'Work Sans', sans-serif",
+        }}
+        defaultValue={'The quick brown fox jumps over the lazy dog'}
+        onHeightChange={(rows) => {
+          console.log('onChange', rows);
+        }}
+      />
+    </div>
+  );
+};
+
+const WithFormReset = () => {
+  const ref = React.useRef<HTMLFormElement>(null);
+  return (
+    <div>
+      <h2>{'Resettable form.'}</h2>
+      <div>{'Resizes once the form gets reset.'}</div>
+      <form ref={ref}>
+        <TextareaAutosize />
+        <input type="reset" />
+      </form>
+    </div>
+  );
+};
+
+const WithManualFormReset = () => {
+  const ref = React.useRef<HTMLFormElement>(null);
+  return (
+    <div>
+      <h2>{'Resettable form via manual reset call.'}</h2>
+      <div>{'Resizes once the form gets reset.'}</div>
+      <form ref={ref}>
+        <TextareaAutosize />
+        <button type="button" onClick={() => ref.current?.reset()}>
+          {'Reset'}
+        </button>
+      </form>
     </div>
   );
 };
@@ -195,8 +244,11 @@ const Demo = () => {
       <UncontrolledMode />
       <OnHeightChangeCallback />
       <MultipleTextareas />
+      <WithCustomFont />
+      <WithFormReset />
+      <WithManualFormReset />
     </div>
   );
 };
 
-ReactDOM.render(<Demo />, document.getElementById('main'));
+createRoot(document.getElementById('main')!).render(<Demo />);

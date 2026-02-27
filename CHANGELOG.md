@@ -1,5 +1,91 @@
 # react-textarea-autosize
 
+## 8.5.9
+
+### Patch Changes
+
+- [#417](https://github.com/Andarist/react-textarea-autosize/pull/417) [`cbced4f`](https://github.com/Andarist/react-textarea-autosize/commit/cbced4f2e22b1ed04eca5183bd3f5d3659dd345e) Thanks [@threepointone](https://github.com/threepointone)! - Added `edge-light` and `workerd` conditions to `package.json` manifest to better serve users using Vercel Edge and Cloudflare Workers.
+
+  This lets tools like Wrangler and the Cloudflare Vite Plugin pick up the right version of the built module, preventing issues like https://github.com/cloudflare/workers-sdk/issues/8723.
+
+## 8.5.8
+
+### Patch Changes
+
+- [#414](https://github.com/Andarist/react-textarea-autosize/pull/414) [`d12e6a5`](https://github.com/Andarist/react-textarea-autosize/commit/d12e6a5f9a9f37860cfad86410d5dcc4e6aaf9ec) Thanks [@benjaminwaterlot](https://github.com/benjaminwaterlot)! - Fixed a race condition leading to an error caused by textarea being unmounted before internal `requestAnimationFrame`'s callback being fired
+
+## 8.5.7
+
+### Patch Changes
+
+- [#409](https://github.com/Andarist/react-textarea-autosize/pull/409) [`8c47e31`](https://github.com/Andarist/react-textarea-autosize/commit/8c47e314bc96077fba62505e71fbcd55a7b9a485) Thanks [@Andarist](https://github.com/Andarist)! - Fixed an issue with resize not happening after the containing form being reset
+
+## 8.5.6
+
+### Patch Changes
+
+- [#400](https://github.com/Andarist/react-textarea-autosize/pull/400) [`7d48e9e`](https://github.com/Andarist/react-textarea-autosize/commit/7d48e9e80a3c6d8c123d135205857cbe39dbf6ee) Thanks [@Yonom](https://github.com/Yonom)! - Add React 19 to the allowed peer dependency range.
+
+## 8.5.5
+
+### Patch Changes
+
+- [#401](https://github.com/Andarist/react-textarea-autosize/pull/401) [`4a34e1b`](https://github.com/Andarist/react-textarea-autosize/commit/4a34e1b28a4b8840ba041fc9f5e448beabd56c5e) Thanks [@olee](https://github.com/olee)! - Add missing `wordSpacing` and `scrollbarGutter` as properties that can impact sizing
+
+## 8.5.4
+
+### Patch Changes
+
+- [#397](https://github.com/Andarist/react-textarea-autosize/pull/397) [`bf3cad8`](https://github.com/Andarist/react-textarea-autosize/commit/bf3cad84e64cc838834e5c71e6074b96e0109b0c) Thanks [@Oyveloper](https://github.com/Oyveloper)! - Force `display: block` for the hidden textarea to prevent other styles from overriding it and thus breaking the resizing functionality
+
+## 8.5.3
+
+### Patch Changes
+
+- [#386](https://github.com/Andarist/react-textarea-autosize/pull/386) [`b3dc597`](https://github.com/Andarist/react-textarea-autosize/commit/b3dc597c7b33e7fc858e82b1605f1fe1137ec775) Thanks [@Andarist](https://github.com/Andarist)! - Distribute completely separate files for the `worker` condition to avoid bundlers from aliasing files targeting node to the ones targeting browsers through the `package.json#browser` alias field.
+
+## 8.5.2
+
+### Patch Changes
+
+- [#381](https://github.com/Andarist/react-textarea-autosize/pull/381) [`e16c24a`](https://github.com/Andarist/react-textarea-autosize/commit/e16c24aaf15e33458c4b433a2debee87b9aab723) Thanks [@Andarist](https://github.com/Andarist)! - Publish files that were previously missing for some conditions.
+
+## 8.5.1
+
+### Patch Changes
+
+- [#377](https://github.com/Andarist/react-textarea-autosize/pull/377) [`4087205`](https://github.com/Andarist/react-textarea-autosize/commit/4087205acb89a2cdfda02dc9297c0db4cafd0ee9) Thanks [@Andarist](https://github.com/Andarist)! - The provided `onChange` will get forwarded again to the underlying `<textarea/>` on the server side.
+
+## 8.5.0
+
+### Minor Changes
+
+- [#373](https://github.com/Andarist/react-textarea-autosize/pull/373) [`05b014a`](https://github.com/Andarist/react-textarea-autosize/commit/05b014a8c46834bba42ccd506d18e28064b9dc9a) Thanks [@Andarist](https://github.com/Andarist)! - Compatibility with node's ESM has been improved. `import TextareaAutosize from 'react-textarea-autosize';` was always meant to provide you the default export of this package (the exported component) and now node should load it this way.
+
+* [#373](https://github.com/Andarist/react-textarea-autosize/pull/373) [`05b014a`](https://github.com/Andarist/react-textarea-autosize/commit/05b014a8c46834bba42ccd506d18e28064b9dc9a) Thanks [@Andarist](https://github.com/Andarist)! - SSR environments should now be able to pick smaller bundles through `package.json#exports`.
+
+- [#373](https://github.com/Andarist/react-textarea-autosize/pull/373) [`05b014a`](https://github.com/Andarist/react-textarea-autosize/commit/05b014a8c46834bba42ccd506d18e28064b9dc9a) Thanks [@Andarist](https://github.com/Andarist)! - This package no longer depends on `process.env.NODE_ENV`. To get dev-only warnings you have to configure your bundler/runtime to use the `development` condition.
+
+### Patch Changes
+
+- [#370](https://github.com/Andarist/react-textarea-autosize/pull/370) [`d33b120`](https://github.com/Andarist/react-textarea-autosize/commit/d33b1200198eb49a3579225a118389e0e1fb82cd) Thanks [@ArnaudRinquin](https://github.com/ArnaudRinquin)! - Add a guard against potentially missing `documents.fonts`
+
+## 8.4.1
+
+### Patch Changes
+
+- [#353](https://github.com/Andarist/react-textarea-autosize/pull/353) [`19aead9`](https://github.com/Andarist/react-textarea-autosize/commit/19aead90a90311362cec51e841d2a56147ad4b5d) Thanks [@knownasilya](https://github.com/knownasilya)! - Workaround for Firefox `scrollHeight` bug affecting textarea's height on a dynamic toggle
+
+* [#362](https://github.com/Andarist/react-textarea-autosize/pull/362) [`2301195`](https://github.com/Andarist/react-textarea-autosize/commit/23011958b6095ea017ecb4482ac043bb9f7a9c3a) Thanks [@ArnaudRinquin](https://github.com/ArnaudRinquin)! - Support automatic resizing when a custom fonts ends up loading
+
+## 8.4.0
+
+### Minor Changes
+
+- [#354](https://github.com/Andarist/react-textarea-autosize/pull/354) [`41d10b2`](https://github.com/Andarist/react-textarea-autosize/commit/41d10b2c5c8f9b8040fe208d09cdb60863fa0f29) Thanks [@Andarist](https://github.com/Andarist)! - `exports` field has been added to the `package.json` manifest.
+
+  Thanks to this, the package now includes a `worker` condition that can be utilized by properly configured bundlers when targeting worker-like environments. It fixes the issue with browser-specific files being prioritized by some bundlers when targeting workers.
+
 ## 8.3.4
 
 ### Patch Changes

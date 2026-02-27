@@ -1,5 +1,5 @@
-import { SizingData } from './getSizingData';
 import forceHiddenStyles from './forceHiddenStyles';
+import { SizingData } from './getSizingData';
 
 // TODO: use labelled tuples once they are avaiable:
 //   export type CalculatedNodeHeights = [height: number, rowHeight: number];
@@ -49,6 +49,9 @@ export default function calculateNodeHeight(
 
   hiddenTextarea.value = value;
   let height = getHeight(hiddenTextarea, sizingData);
+  // Double set and calc due to Firefox bug: https://bugzilla.mozilla.org/show_bug.cgi?id=1795904
+  hiddenTextarea.value = value;
+  height = getHeight(hiddenTextarea, sizingData);
 
   // measure height of a textarea with a single row
   hiddenTextarea.value = 'x';
